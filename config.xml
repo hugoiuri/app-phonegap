@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+        xmlns:gap="http://phonegao.com/ns/1.0"
+        id="org.hugoiuri.app-phonegap"
+        version="1.0.0">
+    <name>
+        App PhoneGap
+    </name>
+    <description>
+        Primeiro App no Phonegap
+    </description>
+    <icon src="images/Logo.png" />
+    <author href="https://github.com/hugoiuri" email="hugoiuri@gmail.com">
+        Hugo Iuri Cordeiro
+    <author/>
+</widget>
