@@ -7,30 +7,72 @@
     
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
-    <title>Document</title>
+    <title>App</title>
 </head>
 <body>
     <div class="container">
         <div class="jumbotron">
             <h1>Plataformas</h1>
         </div>
-        <button class="btn btn-success" onclick="loadDoc()">Ok</button>
-        <div id="demo"></div>
+        
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="funcionarios" href="#funcionarios" onclick="loadEmployeesTab()">Funcionarios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="setores" href="#setores" onclick="loadSectorTab()">Setores</a>
+            </li>
+        </ul>
+        <div id="content"></div>
     </div>
 </body>
 <script>
-    function loadDoc() {
+    function loadEmployeesTab() {
+        document.getElementById('funcionarios').classList.add('active');
+        document.getElementById('setores').classList.remove('active');
+        
+        loadDoc('page1.html', res => {
+            document.getElementById('content').innerHTML = res;
+            listEmployees();
+        });
+    }
+    
+    function loadSectorTab() {
+        document.getElementById('funcionarios').classList.remove('active');
+        document.getElementById('setores').classList.add('active');
+        
+        loadDoc('page2.html', res => {
+            document.getElementById('content').innerHTML = res;
+            
+        });
+    }
+    
+    function loadDoc(url, callback) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
-            console.log(this.readyState)
-            console.log(this.status)
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("demo").innerHTML = this.responseText;
+                callback(this.responseText);
             }
         };
-        xhttp.open("GET", "ajax_info.txt", true);
+        xhttp.open('GET', url, true);
         xhttp.send();
     }
+    
+    function listEmployees() {
+        loadDoc('http://localhost:3000/employees', res => {
+            const employees = JSON.parse(res)
+            employees.map(employee => {
+                document.getElementById('employees')
+                .innerHTML += `<div id="${employee.id}">
+                    Nome: ${employee.name}
+                    Telefone: ${employee.phone}
+                    Setor: ${employee.sector.name}
+                </div>`
+            });
+        })
+    }
+    
+    loadEmployeesTab();
 </script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </html>

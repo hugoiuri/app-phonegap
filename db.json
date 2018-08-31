@@ -1,0 +1,24 @@
+{
+    "employees": [{
+        "id": 1,
+        "name": "Miguel",
+        "phone": "31999999999",
+        "sector": {
+            "id": "1",
+            "name": "Desenvolvimento"
+        }
+    },{
+        "id": 2,
+        "name": "Carlos",
+        "phone": "31999999999",
+        "sector": {
+            "id": "1",
+            "name": "Desenvolvimento"
+        }
+    }
+    ],
+    "sectors": [{
+        "id": 1,
+        "name": "Desenvolvimento"
+    }]
+}
